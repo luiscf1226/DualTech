@@ -54,10 +54,9 @@ La solución sigue los principios de Clean Architecture y está organizada en la
      ```
 
 3. **Acceder a la API**
-   - Swagger UI: https://localhost:5001/swagger
+   - Swagger UI: http://localhost:5041/swagger
    - La API estará disponible en:
-     - HTTPS: https://localhost:5001
-     - HTTP: http://localhost:5000
+     - HTTP: http://localhost:5041
 
 ### macOS
 
@@ -81,10 +80,9 @@ La solución sigue los principios de Clean Architecture y está organizada en la
      ```
 
 3. **Acceder a la API**
-   - Swagger UI: https://localhost:5001/swagger
+   - Swagger UI: http://localhost:5041/swagger
    - La API estará disponible en:
-     - HTTPS: https://localhost:5001
-     - HTTP: http://localhost:5000
+     - HTTP: http://localhost:5041
 
 ## Detalles de la Base de Datos
 
