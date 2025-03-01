@@ -1,0 +1,130 @@
+/* Custom styles for Swagger UI */
+
+/* Header */
+.swagger-ui .topbar {
+    background-color: #1a365d;
+    padding: 10px 0;
+}
+
+.swagger-ui .topbar .download-url-wrapper .select-label {
+    color: white;
+}
+
+/* Main content */
+.swagger-ui .info .title {
+    color: #2c5282;
+    font-size: 36px;
+}
+
+.swagger-ui .info .title small.version-stamp {
+    background-color: #4299e1;
+}
+
+.swagger-ui .info .base-url {
+    font-size: 16px;
+    color: #4a5568;
+}
+
+.swagger-ui .info .description {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Operations */
+.swagger-ui .opblock.opblock-get {
+    background: rgba(97, 175, 254, 0.1);
+    border-color: #61affe;
+}
+
+.swagger-ui .opblock.opblock-post {
+    background: rgba(73, 204, 144, 0.1);
+    border-color: #49cc90;
+}
+
+.swagger-ui .opblock.opblock-put {
+    background: rgba(252, 161, 48, 0.1);
+    border-color: #fca130;
+}
+
+.swagger-ui .opblock.opblock-delete {
+    background: rgba(249, 62, 62, 0.1);
+    border-color: #f93e3e;
+}
+
+.swagger-ui .opblock .opblock-summary-operation-id,
+.swagger-ui .opblock .opblock-summary-path,
+.swagger-ui .opblock .opblock-summary-path__deprecated {
+    font-size: 16px;
+}
+
+/* Models */
+.swagger-ui .model-box {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.swagger-ui .model-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Buttons */
+.swagger-ui .btn {
+    box-shadow: none;
+    border-radius: 4px;
+}
+
+.swagger-ui .btn.execute {
+    background-color: #4299e1;
+    color: white;
+    border-color: #2b6cb0;
+}
+
+.swagger-ui .btn.execute:hover {
+    background-color: #2b6cb0;
+}
+
+/* Response section */
+.swagger-ui .responses-inner h4,
+.swagger-ui .responses-inner h5 {
+    font-size: 16px;
+}
+
+.swagger-ui .response-col_status {
+    font-size: 14px;
+}
+
+.swagger-ui table thead tr td,
+.swagger-ui table thead tr th {
+    color: #1a365d;
+    font-size: 14px;
+}
+
+/* Code samples */
+.swagger-ui .highlight-code {
+    background-color: #2d3748;
+    color: #e2e8f0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Improve readability */
+.swagger-ui .markdown p,
+.swagger-ui .markdown li {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Make the API more responsive */
+@media (max-width: 768px) {
+    .swagger-ui .info .title {
+        font-size: 24px;
+    }
+    
+    .swagger-ui .opblock .opblock-summary-operation-id,
+    .swagger-ui .opblock .opblock-summary-path,
+    .swagger-ui .opblock .opblock-summary-path__deprecated {
+        font-size: 14px;
+    }
+} 
