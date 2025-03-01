@@ -1,0 +1,11 @@
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/bin/Debug/net8.0/PruebaTecnica.Domain.deps.json
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/bin/Debug/net8.0/PruebaTecnica.Domain.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/bin/Debug/net8.0/PruebaTecnica.Domain.pdb
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/PruebaTecnica.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/PruebaTecnica.Domain.AssemblyInfoInputs.cache
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/PruebaTecnica.Domain.AssemblyInfo.cs
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/PruebaTecnica.Domain.csproj.CoreCompileInputs.cache
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/PruebaTecnica.Domain.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/refint/PruebaTecnica.Domain.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/PruebaTecnica.Domain.pdb
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/ref/PruebaTecnica.Domain.dll

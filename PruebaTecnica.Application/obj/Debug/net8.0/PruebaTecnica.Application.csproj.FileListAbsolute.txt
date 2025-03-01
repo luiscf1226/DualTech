@@ -1,0 +1,15 @@
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/bin/Debug/net8.0/PruebaTecnica.Application.deps.json
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/bin/Debug/net8.0/PruebaTecnica.Application.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/bin/Debug/net8.0/PruebaTecnica.Application.pdb
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/bin/Debug/net8.0/PruebaTecnica.Domain.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/bin/Debug/net8.0/PruebaTecnica.Domain.pdb
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/PruebaTecnica.Application.csproj.AssemblyReference.cache
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/PruebaTecnica.Application.GeneratedMSBuildEditorConfig.editorconfig
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/PruebaTecnica.Application.AssemblyInfoInputs.cache
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/PruebaTecnica.Application.AssemblyInfo.cs
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/PruebaTecnica.Application.csproj.CoreCompileInputs.cache
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/PruebaTe.64F57996.Up2Date
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/PruebaTecnica.Application.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/refint/PruebaTecnica.Application.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/PruebaTecnica.Application.pdb
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/Debug/net8.0/ref/PruebaTecnica.Application.dll
