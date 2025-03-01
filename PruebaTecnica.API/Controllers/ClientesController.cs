@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using PruebaTecnica.Application.Interfaces;
 using PruebaTecnica.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PruebaTecnica.API.Controllers
 {
+    [Route("api/clientes")]
     public class ClientesController : BaseApiController
     {
         private readonly IClienteRepository _clienteRepository;
@@ -15,7 +17,7 @@ namespace PruebaTecnica.API.Controllers
             _clienteRepository = clienteRepository;
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<IActionResult> GetClientes()
         {
             try
@@ -29,7 +31,7 @@ namespace PruebaTecnica.API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("getById/{id}")]
         public async Task<IActionResult> GetCliente(long id)
         {
             try
@@ -69,11 +71,25 @@ namespace PruebaTecnica.API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateCliente(Cliente cliente)
         {
             try
             {
+                // Validate ClienteId is 0
+                if (cliente.ClienteId != 0)
+                {
+                    return BadRequest<Cliente>("ClienteId must be 0 for new clients");
+                }
+
+                // Check if Identidad is unique
+                var existingCliente = await _clienteRepository.GetClienteByIdentidad(cliente.Identidad);
+                if (existingCliente != null)
+                {
+                    return Conflict<Cliente>($"A client with Identidad '{cliente.Identidad}' already exists", 
+                        new List<string> { "Identidad must be unique" });
+                }
+
                 await _clienteRepository.AddAsync(cliente);
                 return Created(cliente, "Cliente created successfully");
             }
@@ -83,20 +99,24 @@ namespace PruebaTecnica.API.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCliente(long id, Cliente cliente)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateCliente(Cliente cliente)
         {
             try
             {
-                if (id != cliente.ClienteId)
-                {
-                    return BadRequest<Cliente>("ID in URL does not match ID in request body");
-                }
-
-                var existingCliente = await _clienteRepository.GetByIdAsync(id);
+                // Check if client exists
+                var existingCliente = await _clienteRepository.GetByIdAsync(cliente.ClienteId);
                 if (existingCliente == null)
                 {
-                    return NotFound<Cliente>($"Cliente with ID {id} not found");
+                    return NotFound<Cliente>($"Cliente with ID {cliente.ClienteId} not found");
+                }
+
+                // Check if Identidad is unique (excluding the current client)
+                var clienteWithSameIdentidad = await _clienteRepository.GetClienteByIdentidad(cliente.Identidad);
+                if (clienteWithSameIdentidad != null && clienteWithSameIdentidad.ClienteId != cliente.ClienteId)
+                {
+                    return Conflict<Cliente>($"A client with Identidad '{cliente.Identidad}' already exists", 
+                        new List<string> { "Identidad must be unique" });
                 }
 
                 await _clienteRepository.UpdateAsync(cliente);

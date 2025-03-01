@@ -17,5 +17,11 @@ namespace PruebaTecnica.Infrastructure.Persistence.Repositories
                 .Include(c => c.Ordenes)
                 .FirstOrDefaultAsync(c => c.ClienteId == id);
         }
+
+        public async Task<Cliente> GetClienteByIdentidad(string identidad)
+        {
+            return await _dbContext.Clientes
+                .FirstOrDefaultAsync(c => c.Identidad == identidad);
+        }
     }
 } 
