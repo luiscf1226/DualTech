@@ -1,223 +1,130 @@
-# PruebaTecnica Docker Setup
+# PruebaTecnica - API de Mantenimiento
 
-This repository contains a Docker Compose configuration to run the .NET Web API with SQL Server.
+Este repositorio contiene una API RESTful para el mantenimiento de Clientes, Productos y Órdenes, desarrollada con .NET 8.0 y SQL Server.
 
-## Prerequisites
+## Estructura del Proyecto
 
-- [Docker](https://www.docker.com/products/docker-desktop/) installed on your machine
-- [.NET SDK 8.0](https://dotnet.microsoft.com/download/dotnet/8.0) installed for local development (optional)
-- [Git](https://git-scm.com/downloads) for cloning the repository (optional)
+La solución sigue los principios de Clean Architecture y está organizada en las siguientes capas:
 
-## Detailed Setup Instructions
+- **PruebaTecnica.Domain**: Contiene las entidades del dominio y lógica de negocio.
+  - `Entities/`: Clases Cliente, Producto, Orden y DetalleOrden.
 
-### Windows Setup
+- **PruebaTecnica.Application**: Define interfaces y servicios de aplicación.
+  - `Interfaces/`: Interfaces de repositorios y servicios.
 
-1. **Install Prerequisites**
-   - Download and install [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/)
-   - Download and install [.NET SDK 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
-   - Ensure Docker Desktop is running (check the system tray icon)
+- **PruebaTecnica.Infrastructure**: Implementa el acceso a datos.
+  - `Persistence/`: Contexto de base de datos y configuraciones.
+  - `Repositories/`: Implementaciones de repositorios.
+  - `DependencyInjection/`: Configuración de inyección de dependencias.
 
-2. **Generate HTTPS Development Certificate**
-   - Open PowerShell as Administrator
-   - Run the following commands:
+- **PruebaTecnica.API**: Capa de presentación con controladores REST.
+  - `Controllers/`: Controladores para Cliente, Producto y Orden.
+  - `Middleware/`: Middleware personalizado para manejo de errores.
+
+- **PruebaTecnica.Shared**: Modelos y utilidades compartidas.
+  - `Models/`: DTOs y modelos de respuesta.
+
+## Requisitos Previos
+
+- [Docker](https://www.docker.com/products/docker-desktop/) para la base de datos
+- [.NET SDK 8.0](https://dotnet.microsoft.com/download/dotnet/8.0) para ejecutar la API
+- [Git](https://git-scm.com/downloads) para clonar el repositorio
+
+## Instrucciones de Ejecución
+
+### Windows
+
+1. **Iniciar la Base de Datos**
+   - Abrir PowerShell o Command Prompt
+   - Navegar al directorio del proyecto
+   - Ejecutar:
      ```powershell
-     dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p password
-     dotnet dev-certs https --trust
+     docker-compose up -d db
      ```
-   - Confirm any security prompts that appear
+   - Esto iniciará solo el contenedor de SQL Server
 
-3. **Clone and Navigate to the Repository**
-   - Open Command Prompt or PowerShell
-   - Clone the repository (if not already done):
+2. **Ejecutar la API Manualmente**
+   - En el mismo directorio, navegar a la carpeta de la API:
      ```powershell
-     git clone <repository-url>
-     cd PruebaTecnica
+     cd PruebaTecnica.API
      ```
-
-4. **Build and Run Docker Containers**
-   - In the project directory, run:
+   - Ejecutar la API:
      ```powershell
-     docker-compose up -d --build
-     ```
-   - This will build and start the containers in detached mode
-   - To view logs (optional):
-     ```powershell
-     docker-compose logs -f
+     dotnet run
      ```
 
-5. **Access the Application**
-   - API Swagger UI: https://localhost:8081/swagger
-   - SQL Server connection details:
-     - Server: localhost,1433
-     - Username: sa
-     - Password: YourStrong!Passw0rd
-     - Database: PruebaTecnicaDb
+3. **Acceder a la API**
+   - Swagger UI: https://localhost:5001/swagger
+   - La API estará disponible en:
+     - HTTPS: https://localhost:5001
+     - HTTP: http://localhost:5000
 
-6. **Stop the Application**
-   - When finished, stop the containers:
-     ```powershell
-     docker-compose down
-     ```
-   - To remove volumes as well:
-     ```powershell
-     docker-compose down -v
-     ```
+### macOS
 
-### macOS Setup
-
-1. **Install Prerequisites**
-   - Download and install [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/)
-   - Download and install [.NET SDK 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
-   - Ensure Docker Desktop is running (check the menu bar icon)
-
-2. **Generate HTTPS Development Certificate**
-   - Open Terminal
-   - Run the following commands:
+1. **Iniciar la Base de Datos**
+   - Abrir Terminal
+   - Navegar al directorio del proyecto
+   - Ejecutar:
      ```bash
-     dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p password
-     dotnet dev-certs https --trust
+     docker-compose up -d db
      ```
-   - Enter your macOS password when prompted
+   - Esto iniciará solo el contenedor de SQL Server
 
-3. **Clone and Navigate to the Repository**
-   - Open Terminal
-   - Clone the repository (if not already done):
+2. **Ejecutar la API Manualmente**
+   - En el mismo directorio, navegar a la carpeta de la API:
      ```bash
-     git clone <repository-url>
-     cd PruebaTecnica
+     cd PruebaTecnica.API
      ```
-
-4. **Build and Run Docker Containers**
-   - In the project directory, run:
+   - Ejecutar la API:
      ```bash
-     docker-compose up -d --build
-     ```
-   - This will build and start the containers in detached mode
-   - To view logs (optional):
-     ```bash
-     docker-compose logs -f
+     dotnet run
      ```
 
-5. **Access the Application**
-   - API Swagger UI: https://localhost:8081/swagger
-   - SQL Server connection details:
-     - Server: localhost,1433
-     - Username: sa
-     - Password: YourStrong!Passw0rd
-     - Database: PruebaTecnicaDb
+3. **Acceder a la API**
+   - Swagger UI: https://localhost:5001/swagger
+   - La API estará disponible en:
+     - HTTPS: https://localhost:5001
+     - HTTP: http://localhost:5000
 
-6. **Stop the Application**
-   - When finished, stop the containers:
-     ```bash
-     docker-compose down
-     ```
-   - To remove volumes as well:
-     ```bash
-     docker-compose down -v
-     ```
+## Detalles de la Base de Datos
 
-## Database Initialization
+- **Conexión SQL Server**:
+  - Server: localhost,1433
+  - Username: sa
+  - Password: YourStrong!Passw0rd
+  - Database: PruebaTecnicaDb
 
-The database is automatically initialized in two ways:
+- **Tablas**:
+  - Cliente: Información de clientes
+  - Producto: Catálogo de productos
+  - Orden: Órdenes de compra
+  - DetalleOrden: Detalles de cada orden
 
-1. **Entity Framework Migrations (Primary Method)**
-   - The application uses Entity Framework Core to automatically create and apply migrations
-   - On startup, the application checks if the database exists and creates it if needed
-   - It also seeds initial data if the database is empty
+## Endpoints de la API
 
-2. **SQL Script (Fallback Method)**
-   - If the Entity Framework migrations fail, the SQL script can be used as a fallback
-   - The SQL Server container includes an initialization script that creates the tables and adds sample data
+### Clientes
+- GET /api/clientes/getAll - Obtiene todos los clientes
+- GET /api/clientes/getById/{id} - Obtiene un cliente por ID
+- POST /api/clientes/create - Crea un nuevo cliente
+- PUT /api/clientes/update - Actualiza un cliente existente
 
-The database includes the following tables:
+### Productos
+- GET /api/productos/getAll - Obtiene todos los productos
+- GET /api/productos/getById/{id} - Obtiene un producto por ID
+- POST /api/productos/create - Crea un nuevo producto
+- PUT /api/productos/update - Actualiza un producto existente
 
-1. **Cliente** - Customer information
-   - ClienteId (PK)
-   - Nombre (Name)
-   - Identidad (Identity)
+### Órdenes
+- POST /api/ordenes/create - Crea una nueva orden con sus detalles
 
-2. **Producto** - Product information
-   - ProductoId (PK)
-   - Nombre (Name)
-   - Descripcion (Description, optional)
-   - Precio (Price)
-   - Existencia (Stock)
+## Detener los Servicios
 
-3. **Orden** - Order information
-   - OrdenId (PK)
-   - ClienteId (FK to Cliente)
-   - Impuesto (Tax)
-   - Subtotal
-   - Total
-   - FechaCreacion (Creation Date)
-
-4. **DetalleOrden** - Order detail information
-   - DetalleOrdenId (PK)
-   - OrdenId (FK to Orden)
-   - ProductoId (FK to Producto)
-   - Cantidad (Quantity)
-   - Impuesto (Tax)
-   - Subtotal
-   - Total
-
-## Database Connection String
-
-The application is configured to use the following connection string:
-
-```
-Server=db;Database=PruebaTecnicaDb;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True;
+Para detener la base de datos:
+```bash
+docker-compose down
 ```
 
-## Troubleshooting
-
-### Certificate Issues
-
-If you encounter certificate issues:
-- **Windows**: 
-  - Ensure you ran the certificate commands as Administrator
-  - Verify the certificate path in docker-compose.yml matches your user profile path
-  - Try manually trusting the certificate: `dotnet dev-certs https --trust`
-
-- **macOS**: 
-  - Check if the certificate was properly added to the keychain
-  - You may need to manually approve the certificate in Keychain Access
-  - Try recreating the certificate: `dotnet dev-certs https --clean && dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p password && dotnet dev-certs https --trust`
-
-### SQL Server Connection Issues
-
-If the API cannot connect to SQL Server, ensure that:
-1. SQL Server container is running (`docker ps`)
-2. The connection string in the environment variables is correct
-3. SQL Server has fully started before the API attempts to connect
-4. For Windows, ensure Docker has enough resources allocated (in Docker Desktop settings)
-5. For Mac with Apple Silicon (M1/M2/M3), ensure you're using the ARM64 version of SQL Server image or enable Rosetta for x64 emulation
-
-### Database Initialization Issues
-
-If the database is not initialized properly:
-1. Check the logs for any errors: `docker-compose logs db`
-2. Check the API logs for migration errors: `docker-compose logs api`
-3. The application will retry connecting to the database if it's not available initially
-4. You can manually run the SQL script by connecting to the SQL Server container:
-   ```bash
-   docker exec -it <container_id> /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong!Passw0rd -i /docker-entrypoint-initdb.d/init-db.sql
-   ```
-
-### Docker Issues
-
-- **Windows**:
-  - Ensure Hyper-V or WSL2 is enabled (required for Docker Desktop)
-  - Check Windows Defender Firewall is not blocking Docker
-  - Restart Docker Desktop if containers fail to start
-
-- **macOS**:
-  - Ensure Docker has sufficient resources in preferences
-  - For Apple Silicon Macs, check container architecture compatibility
-  - Restart Docker Desktop if containers fail to start
-
-## Additional Information
-
-- The SQL Server data is persisted in a Docker volume named `sqlserver-data`
-- The API is configured to run in Development mode
-- Both HTTP (8080) and HTTPS (8081) endpoints are exposed
-- The API container will restart automatically if it fails to connect to the database initially
+Para eliminar también los volúmenes:
+```bash
+docker-compose down -v
+```
