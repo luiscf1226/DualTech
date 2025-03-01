@@ -18,6 +18,40 @@ A .NET Web API project with SQL Server database, following Clean Architecture pr
 - Automatic database migrations and seeding
 - Docker support for both the API and SQL Server
 - Swagger UI for API documentation
+- Standardized API response format for consistent error handling
+
+## API Response Format
+
+All API endpoints return responses in a standardized JSON format:
+
+```json
+{
+  "success": true,
+  "message": "Operation completed successfully",
+  "errors": [],
+  "data": {
+    // Response data here
+  }
+}
+```
+
+- **success**: Boolean indicating if the operation was successful
+- **message**: Optional message providing additional information
+- **errors**: Array of error messages (empty if no errors occurred)
+- **data**: The actual response data (can be any type)
+
+### Error Response Example
+
+```json
+{
+  "success": false,
+  "message": "An error occurred while processing your request",
+  "errors": [
+    "Cliente with ID 123 not found"
+  ],
+  "data": null
+}
+```
 
 ## Getting Started
 

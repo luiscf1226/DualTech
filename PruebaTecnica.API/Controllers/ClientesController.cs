@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace PruebaTecnica.API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ClientesController : ControllerBase
+    public class ClientesController : BaseApiController
     {
         private readonly IClienteRepository _clienteRepository;
 
@@ -18,68 +16,116 @@ namespace PruebaTecnica.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        public async Task<IActionResult> GetClientes()
         {
-            var clientes = await _clienteRepository.GetAllAsync();
-            return Ok(clientes);
+            try
+            {
+                var clientes = await _clienteRepository.GetAllAsync();
+                return Success(clientes, "Clientes retrieved successfully");
+            }
+            catch (Exception ex)
+            {
+                return ServerError<IEnumerable<Cliente>>("Error retrieving clientes", new List<string> { ex.Message });
+            }
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Cliente>> GetCliente(long id)
+        public async Task<IActionResult> GetCliente(long id)
         {
-            var cliente = await _clienteRepository.GetByIdAsync(id);
-
-            if (cliente == null)
+            try
             {
-                return NotFound();
-            }
+                var cliente = await _clienteRepository.GetByIdAsync(id);
 
-            return Ok(cliente);
+                if (cliente == null)
+                {
+                    return NotFound<Cliente>($"Cliente with ID {id} not found");
+                }
+
+                return Success(cliente, "Cliente retrieved successfully");
+            }
+            catch (Exception ex)
+            {
+                return ServerError<Cliente>("Error retrieving cliente", new List<string> { ex.Message });
+            }
         }
 
         [HttpGet("{id}/ordenes")]
-        public async Task<ActionResult<Cliente>> GetClienteWithOrdenes(long id)
+        public async Task<IActionResult> GetClienteWithOrdenes(long id)
         {
-            var cliente = await _clienteRepository.GetClienteWithOrdenes(id);
-
-            if (cliente == null)
+            try
             {
-                return NotFound();
-            }
+                var cliente = await _clienteRepository.GetClienteWithOrdenes(id);
 
-            return Ok(cliente);
+                if (cliente == null)
+                {
+                    return NotFound<Cliente>($"Cliente with ID {id} not found");
+                }
+
+                return Success(cliente, "Cliente with orders retrieved successfully");
+            }
+            catch (Exception ex)
+            {
+                return ServerError<Cliente>("Error retrieving cliente with orders", new List<string> { ex.Message });
+            }
         }
 
         [HttpPost]
-        public async Task<ActionResult<Cliente>> CreateCliente(Cliente cliente)
+        public async Task<IActionResult> CreateCliente(Cliente cliente)
         {
-            await _clienteRepository.AddAsync(cliente);
-            return CreatedAtAction(nameof(GetCliente), new { id = cliente.ClienteId }, cliente);
+            try
+            {
+                await _clienteRepository.AddAsync(cliente);
+                return Created(cliente, "Cliente created successfully");
+            }
+            catch (Exception ex)
+            {
+                return ServerError<Cliente>("Error creating cliente", new List<string> { ex.Message });
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCliente(long id, Cliente cliente)
         {
-            if (id != cliente.ClienteId)
+            try
             {
-                return BadRequest();
-            }
+                if (id != cliente.ClienteId)
+                {
+                    return BadRequest<Cliente>("ID in URL does not match ID in request body");
+                }
 
-            await _clienteRepository.UpdateAsync(cliente);
-            return NoContent();
+                var existingCliente = await _clienteRepository.GetByIdAsync(id);
+                if (existingCliente == null)
+                {
+                    return NotFound<Cliente>($"Cliente with ID {id} not found");
+                }
+
+                await _clienteRepository.UpdateAsync(cliente);
+                return Success(cliente, "Cliente updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return ServerError<Cliente>("Error updating cliente", new List<string> { ex.Message });
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCliente(long id)
         {
-            var cliente = await _clienteRepository.GetByIdAsync(id);
-            if (cliente == null)
+            try
             {
-                return NotFound();
-            }
+                var cliente = await _clienteRepository.GetByIdAsync(id);
+                if (cliente == null)
+                {
+                    return NotFound<Cliente>($"Cliente with ID {id} not found");
+                }
 
-            await _clienteRepository.DeleteAsync(cliente);
-            return NoContent();
+                await _clienteRepository.DeleteAsync(cliente);
+                return Success(true, "Cliente deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                return ServerError<bool>("Error deleting cliente", new List<string> { ex.Message });
+            }
         }
     }
 } 
