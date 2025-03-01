@@ -20,6 +20,9 @@ namespace PruebaTecnica.Infrastructure.DependencyInjection
 
             // Register database initializer
             services.AddDatabaseInitializer();
+            
+            // Register database seeding
+            services.AddDatabaseSeeding();
 
             // Register repositories
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

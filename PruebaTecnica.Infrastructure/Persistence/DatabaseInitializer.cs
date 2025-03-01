@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PruebaTecnica.Domain.Entities;
+using PruebaTecnica.Infrastructure.Persistence.Migrations;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,7 +34,7 @@ namespace PruebaTecnica.Infrastructure.Persistence
                 await ApplyMigrationsAsync(dbContext);
 
                 // Seed data if needed
-                await SeedDataAsync(dbContext);
+                await SeedDataAsync();
 
                 _logger.LogInformation("Database initialization completed successfully.");
             }
@@ -65,41 +64,12 @@ namespace PruebaTecnica.Infrastructure.Persistence
             }
         }
 
-        private async Task SeedDataAsync(ApplicationDbContext dbContext)
+        private async Task SeedDataAsync()
         {
-            _logger.LogInformation("Checking if data seeding is needed...");
-
-            // Only seed if the database is empty
-            if (!dbContext.Clientes.Any())
-            {
-                _logger.LogInformation("Seeding data...");
-
-                // Seed Clientes
-                var clientes = new List<Cliente>
-                {
-                    new Cliente { Nombre = "Juan Pérez", Identidad = "0801-1990-12345" },
-                    new Cliente { Nombre = "María López", Identidad = "0501-1985-67890" },
-                    new Cliente { Nombre = "Carlos Rodríguez", Identidad = "0101-1978-54321" }
-                };
-                await dbContext.Clientes.AddRangeAsync(clientes);
-
-                // Seed Productos
-                var productos = new List<Producto>
-                {
-                    new Producto { Nombre = "Laptop HP", Descripcion = "Laptop HP Pavilion 15.6\" Intel Core i5", Precio = 15000.00m, Existencia = 10 },
-                    new Producto { Nombre = "Monitor Dell", Descripcion = "Monitor Dell 24\" Full HD", Precio = 3500.00m, Existencia = 15 },
-                    new Producto { Nombre = "Teclado Logitech", Descripcion = "Teclado mecánico Logitech G Pro", Precio = 1200.00m, Existencia = 20 },
-                    new Producto { Nombre = "Mouse Inalámbrico", Descripcion = "Mouse inalámbrico Logitech M185", Precio = 350.00m, Existencia = 30 }
-                };
-                await dbContext.Productos.AddRangeAsync(productos);
-
-                await dbContext.SaveChangesAsync();
-                _logger.LogInformation("Data seeded successfully.");
-            }
-            else
-            {
-                _logger.LogInformation("Data already exists. Skipping seeding.");
-            }
+            _logger.LogInformation("Starting comprehensive data seeding...");
+            
+            // Use the enhanced seeding method from SeedData class
+            await SeedData.SeedDatabaseAsync(_serviceProvider, _logger);
         }
     }
 } 

@@ -17,3 +17,4 @@
 /Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Infrastructure/obj/Debug/net8.0/PruebaTecnica.Infrastructure.pdb
 /Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Infrastructure/obj/Debug/net8.0/PruebaTecnica.Infrastructure.genruntimeconfig.cache
 /Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Infrastructure/obj/Debug/net8.0/ref/PruebaTecnica.Infrastructure.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Infrastructure/obj/Debug/net8.0/PruebaTecnica.Infrastructure.sourcelink.json

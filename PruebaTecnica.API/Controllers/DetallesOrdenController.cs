@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using PruebaTecnica.Application.Interfaces;
 using PruebaTecnica.Domain.Entities;
+using PruebaTecnica.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace PruebaTecnica.API.Controllers
 {
@@ -62,18 +64,18 @@ namespace PruebaTecnica.API.Controllers
         {
             try
             {
-                var orden = await _ordenRepository.GetByIdAsync(ordenId);
-                if (orden == null)
+                var detalles = await _detalleOrdenRepository.GetDetallesByOrden(ordenId);
+                
+                if (detalles == null || !detalles.Any())
                 {
-                    return NotFound<IEnumerable<DetalleOrden>>($"Orden with ID {ordenId} not found");
+                    return NotFound<IEnumerable<DetalleOrden>>($"No se encontraron detalles para la orden con ID {ordenId}");
                 }
 
-                var detalles = await _detalleOrdenRepository.GetDetallesByOrdenId(ordenId);
                 return Success(detalles, $"Detalles for orden {ordenId} retrieved successfully");
             }
             catch (Exception ex)
             {
-                return ServerError<IEnumerable<DetalleOrden>>("Error retrieving detalles de orden", new List<string> { ex.Message });
+                return ServerError<IEnumerable<DetalleOrden>>("Error al obtener los detalles de la orden", new List<string> { ex.Message });
             }
         }
 

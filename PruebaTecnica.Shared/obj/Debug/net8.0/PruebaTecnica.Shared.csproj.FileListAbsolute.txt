@@ -15,3 +15,4 @@
 /Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Shared/obj/Debug/net8.0/refint/PruebaTecnica.Shared.dll
 /Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Shared/obj/Debug/net8.0/PruebaTecnica.Shared.pdb
 /Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Shared/obj/Debug/net8.0/ref/PruebaTecnica.Shared.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Shared/obj/Debug/net8.0/PruebaTecnica.Shared.sourcelink.json

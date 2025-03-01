@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PruebaTecnica.Application.Interfaces;
 using PruebaTecnica.Domain.Entities;
+using PruebaTecnica.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -74,37 +75,6 @@ namespace PruebaTecnica.API.Controllers
             catch (Exception ex)
             {
                 return ServerError<Cliente>("Error retrieving cliente", new List<string> { ex.Message });
-            }
-        }
-
-        /// <summary>
-        /// Gets a client with their orders
-        /// </summary>
-        /// <param name="id">The client ID</param>
-        /// <returns>The client with their orders</returns>
-        /// <response code="200">Returns the client with their orders</response>
-        /// <response code="404">If the client was not found</response>
-        /// <response code="500">If there was an internal server error</response>
-        [HttpGet("{id}/ordenes")]
-        [ProducesResponseType(typeof(ApiResponse<Cliente>), 200)]
-        [ProducesResponseType(typeof(ApiResponse<Cliente>), 404)]
-        [ProducesResponseType(typeof(ApiResponse<Cliente>), 500)]
-        public async Task<IActionResult> GetClienteWithOrdenes(long id)
-        {
-            try
-            {
-                var cliente = await _clienteRepository.GetClienteWithOrdenes(id);
-
-                if (cliente == null)
-                {
-                    return NotFound<Cliente>($"Cliente with ID {id} not found");
-                }
-
-                return Success(cliente, "Cliente with orders retrieved successfully");
-            }
-            catch (Exception ex)
-            {
-                return ServerError<Cliente>("Error retrieving cliente with orders", new List<string> { ex.Message });
             }
         }
 
@@ -196,51 +166,29 @@ namespace PruebaTecnica.API.Controllers
                     return NotFound<Cliente>($"Cliente with ID {cliente.ClienteId} not found");
                 }
 
-                // Check if Identidad is unique (excluding the current client)
+                // Check if another client (different ID) has the same Identidad
                 var clienteWithSameIdentidad = await _clienteRepository.GetClienteByIdentidad(cliente.Identidad);
+                
+                // Only return conflict if another client has the same Identidad
+                // This allows updating a client while keeping their same Identidad
                 if (clienteWithSameIdentidad != null && clienteWithSameIdentidad.ClienteId != cliente.ClienteId)
                 {
-                    return Conflict<Cliente>($"A client with Identidad '{cliente.Identidad}' already exists", 
+                    return Conflict<Cliente>($"Another client with Identidad '{cliente.Identidad}' already exists", 
                         new List<string> { "Identidad must be unique" });
                 }
 
-                await _clienteRepository.UpdateAsync(cliente);
-                return Success(cliente, "Cliente updated successfully");
+                // Update the existing client's properties
+                existingCliente.Nombre = cliente.Nombre;
+                existingCliente.Identidad = cliente.Identidad;
+                
+                // Save the changes to the existing entity
+                await _clienteRepository.UpdateAsync(existingCliente);
+                
+                return Success(existingCliente, "Cliente updated successfully");
             }
             catch (Exception ex)
             {
                 return ServerError<Cliente>("Error updating cliente", new List<string> { ex.Message });
-            }
-        }
-
-        /// <summary>
-        /// Deletes a client
-        /// </summary>
-        /// <param name="id">The client ID</param>
-        /// <returns>A success message</returns>
-        /// <response code="200">If the client was successfully deleted</response>
-        /// <response code="404">If the client was not found</response>
-        /// <response code="500">If there was an internal server error</response>
-        [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(ApiResponse<bool>), 200)]
-        [ProducesResponseType(typeof(ApiResponse<bool>), 404)]
-        [ProducesResponseType(typeof(ApiResponse<bool>), 500)]
-        public async Task<IActionResult> DeleteCliente(long id)
-        {
-            try
-            {
-                var cliente = await _clienteRepository.GetByIdAsync(id);
-                if (cliente == null)
-                {
-                    return NotFound<Cliente>($"Cliente with ID {id} not found");
-                }
-
-                await _clienteRepository.DeleteAsync(cliente);
-                return Success(true, "Cliente deleted successfully");
-            }
-            catch (Exception ex)
-            {
-                return ServerError<bool>("Error deleting cliente", new List<string> { ex.Message });
             }
         }
     }

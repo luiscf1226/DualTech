@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "E5MyqlAnyu4SuvTR6Fao3n8q/OcmaK0BsjCbEHg/cz8=",
+  "Hash": "4XACCR4W5aRnrnh1tgVooAHT21Flvsha/EbojTca2KQ=",
   "Source": "PruebaTecnica.API",
   "BasePath": "_content/PruebaTecnica.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "PruebaTecnica.API/wwwroot",
+      "Source": "PruebaTecnica.API",
+      "ContentRoot": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/wwwroot/",
+      "BasePath": "_content/PruebaTecnica.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/wwwroot/swagger-ui/custom.css",
+      "SourceId": "PruebaTecnica.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/wwwroot/",
+      "BasePath": "_content/PruebaTecnica.API",
+      "RelativePath": "swagger-ui/custom.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/swagger-ui/custom.css"
+    }
+  ]
 }

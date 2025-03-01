@@ -6,62 +6,115 @@ This repository contains a Docker Compose configuration to run the .NET Web API 
 
 - [Docker](https://www.docker.com/products/docker-desktop/) installed on your machine
 - [.NET SDK 8.0](https://dotnet.microsoft.com/download/dotnet/8.0) installed for local development (optional)
+- [Git](https://git-scm.com/downloads) for cloning the repository (optional)
 
-## Step-by-Step Instructions
+## Detailed Setup Instructions
 
-### 1. Generate HTTPS Development Certificate (Required for HTTPS)
+### Windows Setup
 
-Run the following commands to generate a development certificate for HTTPS:
+1. **Install Prerequisites**
+   - Download and install [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/)
+   - Download and install [.NET SDK 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
+   - Ensure Docker Desktop is running (check the system tray icon)
 
-```bash
-# For Windows PowerShell
-dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p password
-dotnet dev-certs https --trust
+2. **Generate HTTPS Development Certificate**
+   - Open PowerShell as Administrator
+   - Run the following commands:
+     ```powershell
+     dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx -p password
+     dotnet dev-certs https --trust
+     ```
+   - Confirm any security prompts that appear
 
-# For macOS/Linux
-dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p password
-dotnet dev-certs https --trust
-```
+3. **Clone and Navigate to the Repository**
+   - Open Command Prompt or PowerShell
+   - Clone the repository (if not already done):
+     ```powershell
+     git clone <repository-url>
+     cd PruebaTecnica
+     ```
 
-### 2. Make the setup script executable (Optional)
+4. **Build and Run Docker Containers**
+   - In the project directory, run:
+     ```powershell
+     docker-compose up -d --build
+     ```
+   - This will build and start the containers in detached mode
+   - To view logs (optional):
+     ```powershell
+     docker-compose logs -f
+     ```
 
-This step is only needed if you want to use the SQL initialization script approach. The application now supports automatic Entity Framework migrations.
+5. **Access the Application**
+   - API Swagger UI: https://localhost:8081/swagger
+   - SQL Server connection details:
+     - Server: localhost,1433
+     - Username: sa
+     - Password: YourStrong!Passw0rd
+     - Database: PruebaTecnicaDb
 
-```bash
-# For macOS/Linux
-chmod +x setup-db.sh
-```
+6. **Stop the Application**
+   - When finished, stop the containers:
+     ```powershell
+     docker-compose down
+     ```
+   - To remove volumes as well:
+     ```powershell
+     docker-compose down -v
+     ```
 
-### 3. Build and Run the Docker Containers
+### macOS Setup
 
-```bash
-# Build and start the containers
-docker-compose up -d --build
+1. **Install Prerequisites**
+   - Download and install [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/)
+   - Download and install [.NET SDK 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
+   - Ensure Docker Desktop is running (check the menu bar icon)
 
-# To view logs
-docker-compose logs -f
-```
+2. **Generate HTTPS Development Certificate**
+   - Open Terminal
+   - Run the following commands:
+     ```bash
+     dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p password
+     dotnet dev-certs https --trust
+     ```
+   - Enter your macOS password when prompted
 
-### 4. Access the Application
+3. **Clone and Navigate to the Repository**
+   - Open Terminal
+   - Clone the repository (if not already done):
+     ```bash
+     git clone <repository-url>
+     cd PruebaTecnica
+     ```
 
-- API: https://localhost:8081/swagger
-- SQL Server:
-  - Server: localhost,1433
-  - Username: sa
-  - Password: YourStrong!Passw0rd
-  - Database: PruebaTecnicaDb
+4. **Build and Run Docker Containers**
+   - In the project directory, run:
+     ```bash
+     docker-compose up -d --build
+     ```
+   - This will build and start the containers in detached mode
+   - To view logs (optional):
+     ```bash
+     docker-compose logs -f
+     ```
 
-### 5. Stop the Containers
+5. **Access the Application**
+   - API Swagger UI: https://localhost:8081/swagger
+   - SQL Server connection details:
+     - Server: localhost,1433
+     - Username: sa
+     - Password: YourStrong!Passw0rd
+     - Database: PruebaTecnicaDb
 
-```bash
-docker-compose down
-```
-
-To remove volumes as well:
-
-```bash
-docker-compose down -v
-```
+6. **Stop the Application**
+   - When finished, stop the containers:
+     ```bash
+     docker-compose down
+     ```
+   - To remove volumes as well:
+     ```bash
+     docker-compose down -v
+     ```
 
 ## Database Initialization
 
@@ -119,7 +172,16 @@ Server=db;Database=PruebaTecnicaDb;User Id=sa;Password=YourStrong!Passw0rd;Trust
 
 ### Certificate Issues
 
-If you encounter certificate issues, make sure you've generated the development certificate correctly and that the path in the docker-compose.yml file matches your local path.
+If you encounter certificate issues:
+- **Windows**: 
+  - Ensure you ran the certificate commands as Administrator
+  - Verify the certificate path in docker-compose.yml matches your user profile path
+  - Try manually trusting the certificate: `dotnet dev-certs https --trust`
+
+- **macOS**: 
+  - Check if the certificate was properly added to the keychain
+  - You may need to manually approve the certificate in Keychain Access
+  - Try recreating the certificate: `dotnet dev-certs https --clean && dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p password && dotnet dev-certs https --trust`
 
 ### SQL Server Connection Issues
 
@@ -127,6 +189,8 @@ If the API cannot connect to SQL Server, ensure that:
 1. SQL Server container is running (`docker ps`)
 2. The connection string in the environment variables is correct
 3. SQL Server has fully started before the API attempts to connect
+4. For Windows, ensure Docker has enough resources allocated (in Docker Desktop settings)
+5. For Mac with Apple Silicon (M1/M2/M3), ensure you're using the ARM64 version of SQL Server image or enable Rosetta for x64 emulation
 
 ### Database Initialization Issues
 
@@ -138,6 +202,18 @@ If the database is not initialized properly:
    ```bash
    docker exec -it <container_id> /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong!Passw0rd -i /docker-entrypoint-initdb.d/init-db.sql
    ```
+
+### Docker Issues
+
+- **Windows**:
+  - Ensure Hyper-V or WSL2 is enabled (required for Docker Desktop)
+  - Check Windows Defender Firewall is not blocking Docker
+  - Restart Docker Desktop if containers fail to start
+
+- **macOS**:
+  - Ensure Docker has sufficient resources in preferences
+  - For Apple Silicon Macs, check container architecture compatibility
+  - Restart Docker Desktop if containers fail to start
 
 ## Additional Information
 

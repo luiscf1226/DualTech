@@ -1,20 +1,15 @@
-FROM mcr.microsoft.com/mssql/server:2022-latest
+FROM mcr.microsoft.com/azure-sql-edge:latest
 
 USER root
 
 # Copy initialization scripts
 COPY init-db.sql /docker-entrypoint-initdb.d/
-COPY setup-db.sh /docker-entrypoint-initdb.d/
-
-# Make the script executable
-RUN chmod +x /docker-entrypoint-initdb.d/setup-db.sh
 
 # Create a directory for the entrypoint script
 RUN mkdir -p /usr/local/bin/
 
-# Create an entrypoint script
+# Create an entrypoint script that just runs SQL Server
 RUN echo '#!/bin/bash \n\
-/docker-entrypoint-initdb.d/setup-db.sh & \n\
 /opt/mssql/bin/sqlservr' > /usr/local/bin/entrypoint.sh
 
 # Make the entrypoint script executable

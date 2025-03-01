@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PruebaTecnica.Application.Interfaces;
 using PruebaTecnica.Domain.Entities;
+using PruebaTecnica.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -89,10 +90,16 @@ namespace PruebaTecnica.API.Controllers
                     return BadRequest<Orden>($"Cliente with ID {orden.ClienteId} not found");
                 }
 
-                // Set order date if not provided
-                if (orden.Fecha == default)
+                // Validate date
+                if (orden.FechaCreacion > DateTime.Now)
                 {
-                    orden.Fecha = DateTime.Now;
+                    return BadRequest<Orden>("La fecha de la orden no puede ser futura", new List<string> { "La fecha de la orden debe ser menor o igual a la fecha actual" });
+                }
+
+                // Set date to current if not provided
+                if (orden.FechaCreacion == default)
+                {
+                    orden.FechaCreacion = DateTime.Now;
                 }
 
                 await _ordenRepository.AddAsync(orden);
@@ -147,11 +154,18 @@ namespace PruebaTecnica.API.Controllers
                     return NotFound<Orden>($"Orden with ID {id} not found");
                 }
 
-                // Delete associated detalles first
-                var detalles = await _detalleOrdenRepository.GetDetallesByOrdenId(id);
-                foreach (var detalle in detalles)
+                // Delete associated detalles
+                try
                 {
-                    await _detalleOrdenRepository.DeleteAsync(detalle);
+                    var detalles = await _detalleOrdenRepository.GetDetallesByOrden(id);
+                    foreach (var detalle in detalles)
+                    {
+                        await _detalleOrdenRepository.DeleteAsync(detalle);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return ServerError<bool>($"Error deleting detalles for orden {id}", new List<string> { ex.Message });
                 }
 
                 await _ordenRepository.DeleteAsync(orden);

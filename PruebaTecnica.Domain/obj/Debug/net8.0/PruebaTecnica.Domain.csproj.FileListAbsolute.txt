@@ -9,3 +9,4 @@
 /Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/refint/PruebaTecnica.Domain.dll
 /Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/PruebaTecnica.Domain.pdb
 /Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/ref/PruebaTecnica.Domain.dll
+/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/Debug/net8.0/PruebaTecnica.Domain.sourcelink.json

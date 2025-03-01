@@ -14,9 +14,10 @@ namespace PruebaTecnica.API.Controllers
         /// <summary>
         /// Returns a successful response with data
         /// </summary>
+        /// <returns>A successful response with data</returns>
         protected IActionResult Success<T>(T data, string message = "")
         {
-            return Ok(ApiResponse<T>.Success(data, message));
+            return Ok(ApiResponse<T>.CreateSuccess(data, message));
         }
 
         /// <summary>
@@ -30,9 +31,10 @@ namespace PruebaTecnica.API.Controllers
         /// <summary>
         /// Returns a created response with data
         /// </summary>
+        /// <returns>A created response with data</returns>
         protected IActionResult Created<T>(T data, string message = "")
         {
-            return StatusCode(201, ApiResponse<T>.Success(data, message));
+            return StatusCode(201, ApiResponse<T>.CreateSuccess(data, message));
         }
 
         /// <summary>

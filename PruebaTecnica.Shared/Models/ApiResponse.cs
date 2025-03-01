@@ -41,7 +41,7 @@ namespace PruebaTecnica.Shared.Models
         /// <param name="data">The data to include in the response</param>
         /// <param name="message">Optional message for the client</param>
         /// <returns>A successful API response</returns>
-        public static ApiResponse<T> Success(T data, string message = "")
+        public static ApiResponse<T> CreateSuccess(T data, string message = "")
         {
             return new ApiResponse<T>
             {
