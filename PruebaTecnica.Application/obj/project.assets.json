@@ -240,11 +240,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/PruebaTecnica.Application.csproj",
+      "projectUniqueName": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Application/PruebaTecnica.Application.csproj",
       "projectName": "PruebaTecnica.Application",
-      "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/PruebaTecnica.Application.csproj",
+      "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Application/PruebaTecnica.Application.csproj",
       "packagesPath": "/Users/luiscf1226/.nuget/packages/",
-      "outputPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/obj/",
+      "outputPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Application/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/luiscf1226/.nuget/NuGet/NuGet.Config"
@@ -259,8 +259,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/PruebaTecnica.Domain.csproj": {
-              "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/PruebaTecnica.Domain.csproj"
+            "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Domain/PruebaTecnica.Domain.csproj": {
+              "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Domain/PruebaTecnica.Domain.csproj"
             }
           }
         }

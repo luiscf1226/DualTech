@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/PruebaTecnica.Domain.csproj",
+      "projectUniqueName": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Domain/PruebaTecnica.Domain.csproj",
       "projectName": "PruebaTecnica.Domain",
-      "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/PruebaTecnica.Domain.csproj",
+      "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Domain/PruebaTecnica.Domain.csproj",
       "packagesPath": "/Users/luiscf1226/.nuget/packages/",
-      "outputPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Domain/obj/",
+      "outputPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Domain/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/luiscf1226/.nuget/NuGet/NuGet.Config"

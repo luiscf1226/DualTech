@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4XACCR4W5aRnrnh1tgVooAHT21Flvsha/EbojTca2KQ=",
+  "Hash": "lUSd/6QalGcGbKCkFU//T9ZVoi+DyV83h0qzvS2n0aM=",
   "Source": "PruebaTecnica.API",
   "BasePath": "_content/PruebaTecnica.API",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "PruebaTecnica.API/wwwroot",
       "Source": "PruebaTecnica.API",
-      "ContentRoot": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/wwwroot/",
+      "ContentRoot": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.API/wwwroot/",
       "BasePath": "_content/PruebaTecnica.API",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/wwwroot/swagger-ui/custom.css",
+      "Identity": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.API/wwwroot/swagger-ui/custom.css",
       "SourceId": "PruebaTecnica.API",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/wwwroot/",
+      "ContentRoot": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.API/wwwroot/",
       "BasePath": "_content/PruebaTecnica.API",
       "RelativePath": "swagger-ui/custom.css",
       "AssetKind": "All",

@@ -4931,11 +4931,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/PruebaTecnica.API.csproj",
+      "projectUniqueName": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.API/PruebaTecnica.API.csproj",
       "projectName": "PruebaTecnica.API",
-      "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/PruebaTecnica.API.csproj",
+      "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.API/PruebaTecnica.API.csproj",
       "packagesPath": "/Users/luiscf1226/.nuget/packages/",
-      "outputPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/obj/",
+      "outputPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/luiscf1226/.nuget/NuGet/NuGet.Config"
@@ -4950,14 +4950,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/PruebaTecnica.Application.csproj": {
-              "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/PruebaTecnica.Application.csproj"
+            "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Application/PruebaTecnica.Application.csproj": {
+              "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Application/PruebaTecnica.Application.csproj"
             },
-            "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Infrastructure/PruebaTecnica.Infrastructure.csproj": {
-              "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Infrastructure/PruebaTecnica.Infrastructure.csproj"
+            "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Infrastructure/PruebaTecnica.Infrastructure.csproj": {
+              "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Infrastructure/PruebaTecnica.Infrastructure.csproj"
             },
-            "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Shared/PruebaTecnica.Shared.csproj": {
-              "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Shared/PruebaTecnica.Shared.csproj"
+            "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Shared/PruebaTecnica.Shared.csproj": {
+              "projectPath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Shared/PruebaTecnica.Shared.csproj"
             }
           }
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3K/z4+v08io=",
+  "dgSpecHash": "W3uiPZtBduU=",
   "success": true,
-  "projectFilePath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Infrastructure/PruebaTecnica.Infrastructure.csproj",
+  "projectFilePath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Infrastructure/PruebaTecnica.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/Users/luiscf1226/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/luiscf1226/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",

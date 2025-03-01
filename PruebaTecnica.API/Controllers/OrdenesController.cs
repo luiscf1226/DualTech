@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace PruebaTecnica.API.Controllers
 {
+    /// <summary>
+    /// Controller for managing orders
+    /// </summary>
+    [Route("api/ordenes")]
     public class OrdenesController : BaseApiController
     {
         private readonly IOrdenRepository _ordenRepository;
@@ -18,6 +22,13 @@ namespace PruebaTecnica.API.Controllers
         private readonly IDetalleOrdenRepository _detalleOrdenRepository;
         private readonly IProductoRepository _productoRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrdenesController"/> class.
+        /// </summary>
+        /// <param name="ordenRepository">The orden repository.</param>
+        /// <param name="clienteRepository">The cliente repository.</param>
+        /// <param name="detalleOrdenRepository">The detalle orden repository.</param>
+        /// <param name="productoRepository">The producto repository.</param>
         public OrdenesController(
             IOrdenRepository ordenRepository,
             IClienteRepository clienteRepository,
@@ -30,66 +41,38 @@ namespace PruebaTecnica.API.Controllers
             _productoRepository = productoRepository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetOrdenes()
-        {
-            try
-            {
-                var ordenes = await _ordenRepository.GetAllAsync();
-                return Success(ordenes, "Ordenes retrieved successfully");
-            }
-            catch (Exception ex)
-            {
-                return ServerError<IEnumerable<Orden>>("Error retrieving ordenes", new List<string> { ex.Message });
-            }
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetOrden(long id)
-        {
-            try
-            {
-                var orden = await _ordenRepository.GetByIdAsync(id);
-
-                if (orden == null)
-                {
-                    return NotFound<Orden>($"Orden with ID {id} not found");
-                }
-
-                return Success(orden, "Orden retrieved successfully");
-            }
-            catch (Exception ex)
-            {
-                return ServerError<Orden>("Error retrieving orden", new List<string> { ex.Message });
-            }
-        }
-
-        [HttpGet("{id}/detalles")]
-        public async Task<IActionResult> GetOrdenWithDetalles(long id)
-        {
-            try
-            {
-                var orden = await _ordenRepository.GetOrdenWithDetalles(id);
-
-                if (orden == null)
-                {
-                    return NotFound<Orden>($"Orden with ID {id} not found");
-                }
-
-                return Success(orden, "Orden with details retrieved successfully");
-            }
-            catch (Exception ex)
-            {
-                return ServerError<Orden>("Error retrieving orden with details", new List<string> { ex.Message });
-            }
-        }
-
         /// <summary>
         /// Creates a new order with its details
         /// </summary>
         /// <param name="ordenDto">The order creation DTO</param>
         /// <returns>The created order</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/ordenes/create
+        ///     {
+        ///        "ordenId": 0,
+        ///        "clienteId": 1,
+        ///        "detalle": [
+        ///           {
+        ///              "productoId": 1,
+        ///              "cantidad": 2
+        ///           },
+        ///           {
+        ///              "productoId": 2,
+        ///              "cantidad": 1
+        ///           }
+        ///        ]
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Returns the created order</response>
+        /// <response code="400">If the order data is invalid</response>
+        /// <response code="500">If there was an internal server error</response>
         [HttpPost("create")]
+        [ProducesResponseType(typeof(ApiResponse<OrdenResponseDto>), 200)]
+        [ProducesResponseType(typeof(ApiResponse<OrdenResponseDto>), 400)]
+        [ProducesResponseType(typeof(ApiResponse<OrdenResponseDto>), 500)]
         public async Task<IActionResult> CreateOrden([FromBody] OrdenCreateDto ordenDto)
         {
             try
@@ -206,72 +189,6 @@ namespace PruebaTecnica.API.Controllers
             catch (Exception ex)
             {
                 return ServerError<OrdenResponseDto>("Error creating order", new List<string> { ex.Message });
-            }
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrden(long id, Orden orden)
-        {
-            try
-            {
-                if (id != orden.OrdenId)
-                {
-                    return BadRequest<Orden>("ID in URL does not match ID in request body");
-                }
-
-                var existingOrden = await _ordenRepository.GetByIdAsync(id);
-                if (existingOrden == null)
-                {
-                    return NotFound<Orden>($"Orden with ID {id} not found");
-                }
-
-                // Verify cliente exists
-                var cliente = await _clienteRepository.GetByIdAsync(orden.ClienteId);
-                if (cliente == null)
-                {
-                    return BadRequest<Orden>($"Cliente with ID {orden.ClienteId} not found");
-                }
-
-                await _ordenRepository.UpdateAsync(orden);
-                return Success(orden, "Orden updated successfully");
-            }
-            catch (Exception ex)
-            {
-                return ServerError<Orden>("Error updating orden", new List<string> { ex.Message });
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOrden(long id)
-        {
-            try
-            {
-                var orden = await _ordenRepository.GetByIdAsync(id);
-                if (orden == null)
-                {
-                    return NotFound<Orden>($"Orden with ID {id} not found");
-                }
-
-                // Delete associated detalles
-                try
-                {
-                    var detalles = await _detalleOrdenRepository.GetDetallesByOrden(id);
-                    foreach (var detalle in detalles)
-                    {
-                        await _detalleOrdenRepository.DeleteAsync(detalle);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return ServerError<bool>($"Error deleting detalles for orden {id}", new List<string> { ex.Message });
-                }
-
-                await _ordenRepository.DeleteAsync(orden);
-                return Success(true, "Orden and its details deleted successfully");
-            }
-            catch (Exception ex)
-            {
-                return ServerError<bool>("Error deleting orden", new List<string> { ex.Message });
             }
         }
     }

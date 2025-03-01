@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "W+zAjHvTrfg=",
+  "dgSpecHash": "cNaYyD+VTJ0=",
   "success": true,
-  "projectFilePath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.Application/PruebaTecnica.Application.csproj",
+  "projectFilePath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.Application/PruebaTecnica.Application.csproj",
   "expectedPackageFiles": [
     "/Users/luiscf1226/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
     "/Users/luiscf1226/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.11.0/fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",

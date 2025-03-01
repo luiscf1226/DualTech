@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2U70cQCy0OY=",
+  "dgSpecHash": "lGUXj9Gvi+M=",
   "success": true,
-  "projectFilePath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/PruebaTecnica/PruebaTecnica.API/PruebaTecnica.API.csproj",
+  "projectFilePath": "/Users/luiscf1226/Documents/Personal/PruebasTecncias/DualTech/DualTechPrueba/PruebaTecnica.API/PruebaTecnica.API.csproj",
   "expectedPackageFiles": [
     "/Users/luiscf1226/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/Users/luiscf1226/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
