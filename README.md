@@ -23,7 +23,9 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p password
 dotnet dev-certs https --trust
 ```
 
-### 2. Make the setup script executable
+### 2. Make the setup script executable (Optional)
+
+This step is only needed if you want to use the SQL initialization script approach. The application now supports automatic Entity Framework migrations.
 
 ```bash
 # For macOS/Linux
@@ -63,7 +65,18 @@ docker-compose down -v
 
 ## Database Initialization
 
-The SQL Server database is automatically initialized with the following tables:
+The database is automatically initialized in two ways:
+
+1. **Entity Framework Migrations (Primary Method)**
+   - The application uses Entity Framework Core to automatically create and apply migrations
+   - On startup, the application checks if the database exists and creates it if needed
+   - It also seeds initial data if the database is empty
+
+2. **SQL Script (Fallback Method)**
+   - If the Entity Framework migrations fail, the SQL script can be used as a fallback
+   - The SQL Server container includes an initialization script that creates the tables and adds sample data
+
+The database includes the following tables:
 
 1. **Cliente** - Customer information
    - ClienteId (PK)
@@ -94,8 +107,6 @@ The SQL Server database is automatically initialized with the following tables:
    - Subtotal
    - Total
 
-Sample data is also included for testing purposes.
-
 ## Database Connection String
 
 The application is configured to use the following connection string:
@@ -121,8 +132,9 @@ If the API cannot connect to SQL Server, ensure that:
 
 If the database is not initialized properly:
 1. Check the logs for any errors: `docker-compose logs db`
-2. Ensure the setup-db.sh script has execute permissions
-3. You can manually run the SQL script by connecting to the SQL Server container:
+2. Check the API logs for migration errors: `docker-compose logs api`
+3. The application will retry connecting to the database if it's not available initially
+4. You can manually run the SQL script by connecting to the SQL Server container:
    ```bash
    docker exec -it <container_id> /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong!Passw0rd -i /docker-entrypoint-initdb.d/init-db.sql
    ```
@@ -131,4 +143,5 @@ If the database is not initialized properly:
 
 - The SQL Server data is persisted in a Docker volume named `sqlserver-data`
 - The API is configured to run in Development mode
-- Both HTTP (8080) and HTTPS (8081) endpoints are exposed # DualTechPrueba
+- Both HTTP (8080) and HTTPS (8081) endpoints are exposed
+- The API container will restart automatically if it fails to connect to the database initially
